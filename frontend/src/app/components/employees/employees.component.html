@@ -1,0 +1,73 @@
+<div class="container">
+    <p class="flow-text">El siguiente registro corresponde a la toma de temperaturas por parte del área de SST.
+        Los campos a continuación corresponden a: <strong> Nombre, número de identificación, teléfono,
+        empresa a la cual trabaja, temperatura anunciada por el funcionario encargado de tomarla,
+        sucursal donde se encuentra, fecha en que se toma la temperatura, hora en que se toma la 
+        temperatura y funcionario que toma la temperatura.</strong>
+    </p>
+</div>
+
+<div class="container">
+    <div class="div">
+        <div class="col s5">
+            <div class="card">
+                <div class="card-content">
+                    <form #employeeForm="ngForm" (ngSubmit)="addEmployee(employeeForm)">
+                        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)] = "employeeService.selectedEmployee._id">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input type="text" name="nombre" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.nombre" placeholder="Ingresa tu nombre">
+                                <input type="number" name="numId" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.numId" placeholder="Ingresa tu número de identificación">
+                                <input type="number" name="telefono" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.telefono" placeholder="Ingresa tu teléfono">
+                                <input type="text" name="empresa" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.empresa" placeholder="Ingresa la empresa donde trabajas">
+                                <input type="number" name="temperatura" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.temperatura" placeholder="Ingresa la temperatura">
+                                <input type="text" name="sucursal" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.sucursal" placeholder="Ingresa la sucursal donde te encuentras">
+                                <input type="date" name="fechaToma" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.fechaToma" placeholder="Ingresa la fecha de la toma de temperatura">
+                                <input type="time" name="horaToma" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.horaToma" placeholder="Ingresa la hora de la toma de temperatura">
+                                <input type="text" name="funcionarioToma" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.funcionarioToma" placeholder="Funcionario que hace el registro">
+                                <div class="card-actions">
+                                    <div class="input-field col s12">
+                                        <button class="btn">Save</button>
+                                        <button class="btn right" (click)="resetForm(employeeForm)">Clean</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col s7">
+            <table>
+                <thead>
+                    <th>|Nombre|</th>
+                    <th>|# Id|</th>
+                    <th>|Teléfono|</th>
+                    <th>|Empresa|</th>
+                    <th>|Temperatura|</th>
+                    <th>|Sucursal|</th>
+                    <th>|Fecha toma Temp|</th>
+                    <th>|Hora Toma Temp|</th>
+                    <th>|Funcionario|</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let employee of employeeService.employees">
+                        <td>{{employee.nombre}}</td>
+                        <td>{{employee.numId}}</td>
+                        <td>{{employee.telefono}}</td>
+                        <td>{{employee.empresa}}</td>
+                        <td>{{employee.temperatura}}</td>
+                        <td>{{employee.sucursal}}</td>
+                        <td>{{employee.fechaToma}}</td>
+                        <td>{{employee.horaToma}}</td>
+                        <td>{{employee.funcionarioToma}}</td>
+                        <td>
+                            <a (click)="editEmployee(employee)"><i class="material-icons">edit</i></a>
+                            <a (click)="deleteEmployee(employee._id)"><i class="material-icons">delete</i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
